@@ -28,8 +28,9 @@ export class Chat {
     });
 
     const openai = new OpenAIApi(config);
-    let response = await openai
-      .createCompletion({
+    let message = '';
+    try {
+      let response = await openai.createCompletion({
         prompt: `ChatGPT is a friendly chatbot. \n\
         ChatGPT : Hello, how are you?\n\
         ${userName}: ${content}\n\
@@ -37,14 +38,11 @@ export class Chat {
         model: this.model,
         max_tokens: this.maxToken,
         stop: ['\n'],
-      })
-      .then((res) => {
-        return res.data.choices[0].text as string;
-      })
-      .catch((e) => {
-        return e.message;
       });
-
-    return response;
+      message = response.data.choices[0].text as string;
+    } catch (error: any) {
+      console.log(error.message);
+    }
+    return message;
   }
 }
