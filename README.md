@@ -1,4 +1,4 @@
-# Generic ChatGPT 
+# Common ChatGPT 
 
 `common-chatgpt` is a Node.js module that provides an easy way to integrate OpenAI's powerful language model, GPT-3, into your **any** chatbot or conversational AI project.
 
