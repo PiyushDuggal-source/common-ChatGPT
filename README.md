@@ -59,7 +59,7 @@ client.on('message_create', async (msg) => {
   if (msg.id.remote === process.env.WA_CHAT_ID && !msg.fromMe) {
 
     // get response in single line                                 2nd `LINE`
-    const chatgpt_response = await chat.getMessage(msg.author, msg.body);
+    const chatgpt_response = await chat.getMessage(msg.body, msg.author);
 
     // send it anywhere
     client.sendMessage(process.env.WA_CHAT_ID, chatgpt_response);
@@ -96,7 +96,7 @@ client.on('message_create', async (msg: WAWebJS.Message) => {
   if (msg.id.remote === (process.env.WA_CHAT_ID as string) && !msg.fromMe) {
 
     // get response in single line                                 2nd `LINE`
-    const chatgpt_response = await chat.getMessage(msg.author ?? '', msg.body);
+    const chatgpt_response = await chat.getMessage(msg.body, msg.author ?? '');
 
     // send it anywhere
     client.sendMessage(process.env.WA_CHAT_ID as string, chatgpt_response);
@@ -141,8 +141,8 @@ client.on(Events.MessageCreate, async (message) => {
 
     // get response in single line                                 2nd `LINE`
   const chatgpt_response = await chat.getMessage(
-    message.member.displayName,
-    message.content
+    message.content,
+    message.member.displayName
   );
 
     // send it anywhere
@@ -158,10 +158,6 @@ type Model = 'text-davinci-003' | 'text-curie-001' | 'text-babbage-001' | 'text-
 
 ```ts
 {
-    prompt:  `ChatGPT is a friendly chatbot. \n\
-        ChatGPT : Hello, how are you?\n\
-        ${userName ?? 'user'}: ${content}\n\
-        ChatGPT:`,
     model: "text-davinci-003",
     max_token: 300,
     temprature: 0.8,

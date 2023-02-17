@@ -40,10 +40,7 @@ export class Chat {
 
     try {
       let response = await openai.createCompletion({
-        prompt: `ChatGPT is a friendly chatbot. \n\
-        ChatGPT : Hello, how are you?\n\
-        ${userName ?? 'user'}: ${content}\n\
-        ChatGPT:`,
+        prompt: content,
         model: this.model,
         max_tokens: this.maxToken,
         temperature: this.temprature,
