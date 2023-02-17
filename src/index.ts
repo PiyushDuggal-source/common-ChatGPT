@@ -8,7 +8,6 @@ type Model =
 
 interface Options {
   apiKey: string;
-  prompt?: string;
   model?: Model;
   maxToken?: number;
   temprature?: number;
@@ -19,13 +18,11 @@ export class Chat {
   private model: string;
   private maxToken: number;
   private temprature: number;
-  private prompt?: string;
   constructor(options: Options) {
     this.apiKey = options.apiKey;
     this.model = options.model ?? 'text-davinci-003';
     this.maxToken = options.maxToken ?? 300;
     this.temprature = options.temprature ?? 0.8;
-    this.prompt = options.prompt;
   }
 
   /**
@@ -33,7 +30,7 @@ export class Chat {
    * @param {string} content
    * @param {string} userName - Optional
    */
-  async getMessage(content: string, userName?: string) {
+  async getMessage(content: string, userName?: string, custPrompt?: string) {
     const config = new Configuration({
       apiKey: this.apiKey,
     });
@@ -43,8 +40,8 @@ export class Chat {
 
     try {
       let response = await openai.createCompletion({
-        prompt: this.prompt
-          ? this.prompt
+        prompt: custPrompt
+          ? custPrompt
           : `ChatGPT is a friendly chatbot. \n\
         ChatGPT : Hello, how are you?\n\
         ${userName ?? 'user'}: ${content}\n\
