@@ -30,7 +30,7 @@ export class Chat {
    * @param {string} content
    * @param {string} userName - Optional
    */
-  async getMessage(content: string, userName?: string, custPrompt?: string) {
+  async getMessage(content: string, userName?: string) {
     const config = new Configuration({
       apiKey: this.apiKey,
     });
@@ -40,9 +40,7 @@ export class Chat {
 
     try {
       let response = await openai.createCompletion({
-        prompt: custPrompt
-          ? custPrompt
-          : `ChatGPT is a friendly chatbot. \n\
+        prompt: `ChatGPT is a friendly chatbot. \n\
         ChatGPT : Hello, how are you?\n\
         ${userName ?? 'user'}: ${content}\n\
         ChatGPT:`,
