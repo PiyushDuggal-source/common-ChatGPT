@@ -6,12 +6,8 @@
 
 It also includes types for [`models`](#model-types) provided by ChatGPT, so _**no**_ need to remember all the Model names
 
-* ### WhatsApp
-![WhatsApp Image showing ChatGPT](https://i.imgur.com/jtF9YI5.png)
-
-* ### Discord
-![Discord Image showing ChatGPT](https://imgur.com/135Ebdj.png)
 #### Content:
+* [Examples](#examples)
 * [Installation](#installation)
 * [Usage](#usage)
     * WhatsApp
@@ -19,6 +15,15 @@ It also includes types for [`models`](#model-types) provided by ChatGPT, so _**n
       * [ Typescript ](#typescript)
     * Discord
       * [Javascript-D](#javascript-d)
+* [Default Configs](#default-configs)
+
+
+## Examples
+* ### WhatsApp
+![WhatsApp Image showing ChatGPT](https://i.imgur.com/jtF9YI5.png)
+
+* ### Discord
+![Discord Image showing ChatGPT](https://imgur.com/135Ebdj.png)
 
 ## Installation
 ```
@@ -54,7 +59,7 @@ client.on('message_create', async (msg) => {
   if (msg.id.remote === process.env.WA_CHAT_ID && !msg.fromMe) {
 
     // get response in single line                                 2nd `LINE`
-    const chatgpt_response = await chat.getRes(msg.author, msg.body);
+    const chatgpt_response = await chat.getMessage(msg.author, msg.body);
 
     // send it anywhere
     client.sendMessage(process.env.WA_CHAT_ID, chatgpt_response);
@@ -91,7 +96,7 @@ client.on('message_create', async (msg: WAWebJS.Message) => {
   if (msg.id.remote === (process.env.WA_CHAT_ID as string) && !msg.fromMe) {
 
     // get response in single line                                 2nd `LINE`
-    const chatgpt_response = await chat.getRes(msg.author ?? '', msg.body);
+    const chatgpt_response = await chat.getMessage(msg.author ?? '', msg.body);
 
     // send it anywhere
     client.sendMessage(process.env.WA_CHAT_ID as string, chatgpt_response);
@@ -135,7 +140,7 @@ client.on(Events.MessageCreate, async (message) => {
   if (message.channel.id !== BOT_CHANNEL) return;
 
     // get response in single line                                 2nd `LINE`
-  const chatgpt_response = await chat.getRes(
+  const chatgpt_response = await chat.getMessage(
     message.member.displayName,
     message.content
   );
@@ -144,9 +149,19 @@ client.on(Events.MessageCreate, async (message) => {
   await message.channel.send(chatgpt_response);
 });
 ```
-##### Model types
+#### Model types
 ```
 type Model = 'text-davinci-003' | 'text-curie-001' | 'text-babbage-001' | 'text-ada-001';
+```
+
+## Default Configs
+
+```ts
+{
+    model: "text-davinci-003",
+    max_token: 300,
+    temprature: 0.8,
+}
 ```
 
 ## Contributing
