@@ -158,6 +158,10 @@ type Model = 'text-davinci-003' | 'text-curie-001' | 'text-babbage-001' | 'text-
 
 ```ts
 {
+    prompt:  `ChatGPT is a friendly chatbot. \n\
+        ChatGPT : Hello, how are you?\n\
+        ${userName ?? 'user'}: ${content}\n\
+        ChatGPT:`,
     model: "text-davinci-003",
     max_token: 300,
     temprature: 0.8,
