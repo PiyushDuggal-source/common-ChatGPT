@@ -1,6 +1,6 @@
 {
   "name": "common-chatgpt",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This generic module helps in integrating ChatGPT to your any project.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,9 @@
     "discord chatgpt",
     "chatgpt",
     "whatsapp",
-    "discord"
+    "discord",
+    "openai",
+    "gpt"
   ],
   "author": "Piyush Duggal <duggalpiyush0@gmail.com>",
   "license": "ISC",
